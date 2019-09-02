@@ -1,0 +1,6 @@
+.navbar-expand .navbar-nav .nav-link {
+   padding: 0px 20px 0px 20px;
+}
+.nav-link:not(:last-child) { 
+    border-right:solid 1px #000;/* This will not give border to last li element */
+}
