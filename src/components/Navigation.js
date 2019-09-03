@@ -25,6 +25,7 @@ class Navigation extends React.Component {
         <Navbar bg="light" variant="light">
         <Navbar.Brand href="/"><i className="fas fa-map-marker"></i> MyAid</Navbar.Brand>
         <Nav className="ml-auto">
+          <Nav.Link href="/my_map">Map</Nav.Link>
           <Nav.Link href="#features"><i className="fas fa-user-alt"></i></Nav.Link>
           <Nav.Link href="#" onClick={this.handleSignOut}><i className="fas fa-sign-out-alt"></i></Nav.Link>
         </Nav>
@@ -42,24 +43,5 @@ class Navigation extends React.Component {
   	}
  	}
 } 
-
-
-
-    /*return (
-      <Navbar bg="light" variant="light">
-        <Navbar.Brand href="/"><i className="fas fa-map-marker"></i> MyAid</Navbar.Brand>
-        <Nav className="ml-auto">
-          if(sessionStorage.user) {
-          <Nav.Link href="/">Home</Nav.Link>
-          }
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
-          
-        </Nav>
-      </Navbar>
-    );
-      }
-}
-*/
 
 export default Navigation;
