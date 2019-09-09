@@ -15,12 +15,11 @@ class RequestForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
         const request = {
           description: this.state.description,
-          type: this.state.type,
+          request_type: this.state.request_type,
           longitude: this.state.longitude,
-          latitute: this.state.latitute,
+          latitude: this.state.latitude,
           status: "unfulfilled",
           volunteer_count: 0
         } 
@@ -32,7 +31,7 @@ class RequestForm extends React.Component {
             .then(response => {
               console.log(response);
               console.log(response.data);
-              window.location.href = "/";
+              //window.location.href = "/";
             })
     }
 
@@ -42,28 +41,32 @@ class RequestForm extends React.Component {
 		return (
       <Jumbotron>
         <h1>Request Submission</h1>
-        <p>SUbmit a request to get help on you r sdfkgjsdf gksdjhg isdfuhgdisfughds ifughsd of</p>
+        <p>Submit a request to get help on you r sdfkgjsdf gksdjhg isdfuhgdisfughds ifughsd of</p>
         <Form onSubmit={this.handleSubmit}>
 
           <Form.Group controlId="Description">
             <Form.Label>Description</Form.Label>
-            <Form.Control required onChange={this.handleChange} as="textarea" rows="3" id="description" name="description" placeholder="Enter your description" maxLength={300}/>
+            <Form.Control required onChange={this.handleChange} as="textarea" rows="3" name="description" placeholder="Enter your description" maxLength={300}/>
           </Form.Group>
           
           <Form.Group as={Row}>
-            <Form.Label as="legend" column sm={2} required onChange={this.handleChange} name="type">
+            <Form.Label as="legend" column sm={2} required  >
               Type
             </Form.Label>
             <Col sm={10}>
               <Form.Check
                 type="radio"
                 label="One-time task"
-                name="formHorizontalRadios"
+                value="task"
+                name="request_type"
+                onChange={this.handleChange}
               />
               <Form.Check
                 type="radio"
                 label="Material need"
-                name="formHorizontalRadios"
+                value="material"
+                name="request_type"
+                onChange={this.handleChange}
               />
             </Col>
           </Form.Group>
