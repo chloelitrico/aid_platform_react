@@ -6,6 +6,7 @@ import Navigation from './components/Navigation'
 import SignUp from './components/Signup'
 import ErrorPage from './components/ErrorPage'
 import MyMap from './components/MyMap'
+import Request from './components/Request'
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <PublicRoute path="/login" component={Login} />
         <PublicRoute path="/signup" component={SignUp} />
         <PrivateRoute path="/my_map" component={MyMap} />
+        <PrivateRoute path="/request" component={Request} />
         <Route component={ErrorPage} />
       </Switch>
     </div>

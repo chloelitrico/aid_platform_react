@@ -5,15 +5,15 @@ class MyMap extends React.Component {
 
   state = {
     viewport: {
-      width: "100vw",
-      height: "100vh",
+      width: "",
+      height: "",
       latitude: 0,
       longitude: 0,
       zoom: 0
     }
   };
 
-  componentDidMount(){
+  componentWillMount(){
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({
         viewport: {
@@ -37,7 +37,7 @@ class MyMap extends React.Component {
         <GeolocateControl 
           positionOptions={{enableHighAccuracy: true}}
           trackUserLocation={true}
-          zoom={5}
+          fitBoundsOptions={{maxZoom: 5}}
         />
 
       </ReactMapGL>
