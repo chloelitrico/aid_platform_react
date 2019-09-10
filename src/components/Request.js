@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+import $ from 'jquery';
 import { Jumbotron, Form, Button, Col, Row } from "react-bootstrap";
 
 
@@ -13,8 +13,7 @@ class RequestForm extends React.Component {
         this.setState({ [event.target.name]: event.target.value });
       }
 
-    handleSubmit(event) {
-        event.preventDefault();
+     handleSubmit() {
         const request = {
           description: this.state.description,
           request_type: this.state.request_type,
@@ -22,19 +21,24 @@ class RequestForm extends React.Component {
           latitude: this.state.latitude,
           status: "unfulfilled",
           volunteer_count: 0
-        } 
+        }; 
 
         console.log(request);
         
-        axios
-            .post('http://localhost:3001/requests', {request: request})
-            .then(response => {
-              console.log(response);
-              console.log(response.data);
-              //window.location.href = "/";
-            })
-    }
-
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:3001/requests',
+          data: {request: request},
+          headers: JSON.parse(sessionStorage.user)
+        })
+        /*.done((data) => {
+          this.props.handleNewAppointment(data);
+        })
+        .fail((response) => {
+          this.setState({formErrors: response.responseJSON,
+                         formValid: false});
+        });*/
+      }
 
 
 	render() {
