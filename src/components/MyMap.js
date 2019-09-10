@@ -1,17 +1,23 @@
 import React from 'react';
+import $ from 'jquery';
 import ReactMapGL, { Marker, GeolocateControl } from 'react-map-gl';
 
 class MyMap extends React.Component {
-
-  state = {
-    viewport: {
-      width: "",
-      height: "",
-      latitude: 0,
-      longitude: 0,
-      zoom: 0
+  constructor () {
+    super();
+    this.state = {
+      requests: [],
+      viewport: {
+        width: "",
+        height: "",
+        latitude: 0,
+        longitude: 0,
+        zoom: 0
+      }
     }
-  };
+  }
+
+
 
   componentWillMount(){
     navigator.geolocation.getCurrentPosition(position => {
@@ -27,6 +33,17 @@ class MyMap extends React.Component {
     })  
   }
 
+  componentDidMount(){
+    $.ajax({
+			type: 'GET',
+      url: 'http://localhost:3001/requests',
+      headers: JSON.parse(sessionStorage.user)
+		}).done((data) => {
+      this.setState({requests: data});
+    });
+    
+  }
+
   render() {
     return (
       <ReactMapGL
@@ -39,7 +56,11 @@ class MyMap extends React.Component {
           trackUserLocation={true}
           fitBoundsOptions={{maxZoom: 5}}
         />
-
+        {this.state.requests.map((request, key) => 
+          <Marker key={request.id} latitude={request.latitude} longitude={request.longitude} offsetLeft={-20} offsetTop={-10}>
+            <div><i className="fas fa-map-marker"/></div>
+          </Marker>
+        )}
       </ReactMapGL>
     );
   }
