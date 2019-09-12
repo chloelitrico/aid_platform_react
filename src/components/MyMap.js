@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import ReactMapGL, { Marker, GeolocateControl } from 'react-map-gl';
+import Counter from './Counter'
 
 class MyMap extends React.Component {
   constructor () {
@@ -46,6 +47,8 @@ class MyMap extends React.Component {
 
   render() {
     return (
+      <div>
+        <Counter/>
       <ReactMapGL
         {...this.state.viewport}
         onViewportChange={(viewport) => this.setState({viewport})}
@@ -62,6 +65,7 @@ class MyMap extends React.Component {
           </Marker>
         )}
       </ReactMapGL>
+      </div>
     );
   }
 }

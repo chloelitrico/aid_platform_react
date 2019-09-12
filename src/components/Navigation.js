@@ -4,6 +4,21 @@ import './Navigation.css';
 import $ from 'jquery';
 
 class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    };
+}
+
+  componentWillMount(){
+    if(sessionStorage.getItem('user') != null){
+        this.setState({isLoggedIn: true}); 
+    } 
+    else{
+        this.setState({isLoggedIn: false}); 
+    }
+  }
   
   handleSignOut = (e) => {
 		e.preventDefault();
@@ -13,35 +28,37 @@ class Navigation extends React.Component {
 			data: JSON.parse(sessionStorage.user)
 		})
 		.done(() => {
-			sessionStorage.removeItem('user');
-			//this.props.history.push('/');
-		})
+      sessionStorage.removeItem('user');
+      window.location.reload();
+      this.props.history.push('/login');
+    })
+    
 	}
 
   render() {
 
-    if(sessionStorage.getItem('user')) {
+
       return (
         <Navbar bg="light" variant="light">
         <Navbar.Brand href="/"><i className="fas fa-map-marker"></i> MyAid</Navbar.Brand>
         <Nav className="ml-auto">
+        {(this.state.isLoggedIn) ?
           <Nav.Link href="/my_map">Map</Nav.Link>
+          : null }
+          {(this.state.isLoggedIn) ?
           <Nav.Link href="#features"><i className="fas fa-user-alt"></i></Nav.Link>
+          : <Nav.Link href="/signup">Sign-Up</Nav.Link> }
+          {(this.state.isLoggedIn) ?
           <Nav.Link href="#" onClick={this.handleSignOut}><i className="fas fa-sign-out-alt"></i></Nav.Link>
+          : <Nav.Link href="/login">Log-In</Nav.Link> }
+          
+            
         </Nav>
       </Navbar>
-    )} else {
-  		return (
-        <Navbar bg="light" variant="light">
-          <Navbar.Brand href="/"><i className="fas fa-map-marker"></i> MyAid</Navbar.Brand>
-          <Nav className="ml-auto">
-            <Nav.Link href="/signup">Sign-Up</Nav.Link>
-            <Nav.Link href="/login">Log-In</Nav.Link>
-          </Nav>
-        </Navbar>
+
   		)
   	}
  	}
-} 
+
 
 export default Navigation;

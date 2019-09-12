@@ -21,6 +21,7 @@ class Login extends React.Component {
           uid: response.data.uid
         })
       );
+      window.location.reload();
       this.props.history.push('/');
     })        
   }  
