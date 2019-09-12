@@ -9,6 +9,7 @@ class MyMap extends React.Component {
     this.state = {
       requests: [],
       viewport: {
+        mapStyle: "mapbox://styles/mapbox/satellite-v9",
         width: "",
         height: "",
         latitude: 0,
